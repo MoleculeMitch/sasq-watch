@@ -36,9 +36,9 @@ def table (request):
         if year_as_str.isdigit():
             occurance_of_year[year_as_str] += 1
             count += 1
-        
+
     context = {
-        'stats': occurance_of_year,
+        'stats': sorted(occurance_of_year),
         'count': count
     }
     return render(request, 'pages/tables.html', context)

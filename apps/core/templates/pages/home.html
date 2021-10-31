@@ -1,22 +1,53 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - Home
+    SASQ-WATCH - Home
 {% endblock title %}
 
 
 {% block content %}
-<div class="p-5 mb-4 bg-light rounded-3">
-  <h1 class="display-4">My Site</h1>
-  <p class="lead">This is a simple Jumbotron component implemented with Bootstrap 5 classes.</p>
-  <hr class="my-4">
-  <p>Edit this to include your content.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
-  </p>
-</div>
+<div class='container home-container'>
+    <h1 class='home-header'> SASQ-WATCH</h1>
 
-<p>More stuff. {{ example_context_variable }}.</p>
+    <div class='home-subhead-wrapper'>
+        <p class='home-subtext subhead-wrapper-item'> explore the data</p>
+        <img class='foot-icon subhead-wrapper-item'src='../static/images/foot-icon.png' alt='foot icon'/>
+        <p class='home-subtext subhead-wrapper-item'> find the Bigfoot</p>
+    </div>
+
+    <div class='home-content-wrapper'>
+        <div class='home-row-container'>
+            <div class='dash-wrapper'>
+                <div class='dash-cards'>
+                
+                </div>
+                <p>SIGHTINGS</p>
+            </div>
+            <div class='dash-wrapper'>
+                <div class='dash-cards'>
+                
+                </div>
+                <p>STATES</p>
+            </div>
+
+        </div>
+        <div class='home-row-container'>
+            <div class='dash-wrapper'>
+                <div class='dash-cards'>
+                
+                </div>
+                <p>YEARS</p>
+            </div>
+            <div class='dash-wrapper'>
+                <div class='dash-cards'>
+                
+                </div>
+                <p>SEASONS</p>
+            </div>
+        </div>
+    </div>
+  
+</div>
 
 {% endblock content %}
 

@@ -1,0 +1,110 @@
+/* Custom CSS goes here */
+/* @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Ultra&display=swap'); */
+/* font-family: 'Raleway', sans-serif;
+font-family: 'Ultra', serif; */
+
+/* ALL FONTS AND COLORS AS VARIABLES */
+:root {
+    --salmon: #F49B7B;
+    --light-salmon: rgba(244, 155, 123, 0.40);
+
+
+
+    --main-font: 'Raleway', sans-serif;
+    --header-font:'Ultra', serif;
+}
+
+
+
+body{
+    background: center/cover url("../images/bkg.png") no-repeat;
+    height: 100%;
+    font-family: var(--main-font);
+    text-align: center;
+}
+
+
+/* NAV BAR RELATED CSS */
+.navbar {
+    background: rgba(21, 22, 22, 0.55);
+    height: 5rem;
+
+}
+.nav-content-container{
+    margin: auto;
+    max-width: 93.25rem;
+}
+.nav-main-links-wrapper{
+    margin: auto;
+}
+.main-nav-links{
+    margin: 0 1.25rem;
+}
+.nav-link{
+    color: #fff;
+    font-size: .875em;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.nav-link:hover{
+    color: var(--salmon);
+}
+.navbar-avatar {
+    height: 1.875rem;
+    margin-top: -.625rem;
+    margin-bottom: -.625rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.nav-btn{
+    background:var(--light-salmon);
+    width: 8.125rem;
+    color: #fff;
+    border-radius: 50px;
+    border: solid .5px #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+.nav-btn:hover{
+    background: var(--salmon);
+    border-color: var(--salmon);
+}
+.logged-in-as{
+    display: flex;
+    align-items: center;
+}
+.logged-in-as p{
+    color:#fff;
+    margin-left: .3125rem;
+    font-size: .875em;
+}
+.navbar-toggler{
+    border: none;
+    padding: 0;
+}
+.navbar-toggler-icon{
+    color: #fff;
+    font-size: 2em;
+    display: grid;
+    place-items: center;
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+
+
+/* MEDIA QUERIES HERE:  */
+
+@media (max-width: 1200px){
+    .navbar-collapse{
+        background:rgba(21, 22, 22, 0.90);
+        margin-top: 2rem;
+    }
+    .logged-in-as{
+        margin: auto;
+    }
+    .nav-btn{
+        margin: .5rem 0;
+    }
+}

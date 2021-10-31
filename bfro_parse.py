@@ -12,6 +12,7 @@ for object in data:
     year = str(year)
     if year.isdigit():
         year_count.append(year)
+    year_count.sort()
     print(year_count)
         
 
