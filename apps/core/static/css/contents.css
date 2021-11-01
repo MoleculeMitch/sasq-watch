@@ -1,0 +1,13 @@
+.contents-container {
+    border: solid 2px blue;
+    margin: 2rem 0;
+}
+
+.test{
+    max-width: 1000px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    border: solid 2px orange;
+    margin: auto;
+}

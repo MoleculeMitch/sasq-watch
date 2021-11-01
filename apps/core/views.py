@@ -20,9 +20,7 @@ def about(request):
 
     return render(request, 'pages/about.html', context)
 
-# this is a temporary view function
-# im simply using this to figure out how to clean up the data
-def table (request):
+def sightings(request):
     with open('bfro_reports.json') as bfro_jsonfile:
         data = json.load(bfro_jsonfile)
 
@@ -41,16 +39,22 @@ def table (request):
         'stats': sorted(occurance_of_year),
         'count': count
     }
-    return render(request, 'pages/tables.html', context)
+    return render(request, 'pages/sightings.html', context)
 
-# if '-' in str:
-#    #do something
-# output = []
-# for item in input_list:
-#     if '-' in item:
-#     	continue
-#     if item.isalpha():
-#     	continue
-#     output.append(item)
+def years(request):
+    context = {
+    }
 
-# print(output)
+    return render(request, 'pages/years.html', context)
+
+def states(request):
+    context = {
+    }
+
+    return render(request, 'pages/states.html', context)
+
+def seasons(request):
+    context = {
+    }
+
+    return render(request, 'pages/seasons.html', context)

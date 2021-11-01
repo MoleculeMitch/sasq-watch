@@ -15,12 +15,12 @@ font-family: 'Ultra', serif; */
 }
 
 
-
 body{
     background: center/cover url("../images/bkg.png") no-repeat;
     height: 100%;
     font-family: var(--main-font);
     text-align: center;
+    border: solid 2px red;
 }
 
 

@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - Home
+    My Site - STATES
 {% endblock title %}
 
 
 {% block content %}
-<p> {{stats}} </p>
-<h3> {{count}} </h3>
-
+    {% include "../pages/contents.html" %}
 {% endblock content %}
-
-
