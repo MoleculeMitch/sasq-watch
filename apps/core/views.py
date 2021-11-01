@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from collections import Counter
+import pygal
 import json
 
 def parse_bfro_json():

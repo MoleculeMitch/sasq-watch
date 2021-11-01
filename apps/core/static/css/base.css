@@ -48,6 +48,9 @@ body{
 .nav-link:hover{
     color: var(--salmon);
 }
+.active{
+    color: var(--salmon)
+}
 .navbar-avatar {
     height: 1.875rem;
     margin: -.625rem 0;

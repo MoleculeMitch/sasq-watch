@@ -61,25 +61,28 @@
                 </li>
             </ul>
 
+            
             <ul class="navbar-nav me-auto nav-main-links-wrapper">
+                {% with request.resolver_match.url_name as url_name %}
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="/">HOME</a>
+                    <a href="{%url 'home'%}" class="nav-link main-nav-links{%if url_name == 'home'%} active {%endif%}">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="{% url 'about' %}">ABOUT</a>
+                    <a class="nav-link main-nav-links {%if url_name == 'about'%} active {%endif%}" href="{% url 'about' %}">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="{% url 'sightings' %}">SIGHTINGS</a>
+                    <a class="nav-link main-nav-links {%if url_name == 'sightings'%} active {%endif%}" href="{% url 'sightings' %}">SIGHTINGS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="{% url 'years' %}">YEARS</a>
+                    <a class="nav-link main-nav-links {%if url_name == 'years'%} active {%endif%}" href="{% url 'years' %}">YEARS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="{% url 'states' %}">STATES</a>
+                    <a class="nav-link main-nav-links {%if url_name == 'states'%} active {%endif%}" href="{% url 'states' %}">STATES</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-links" href="{% url 'seasons' %}">SEASONS</a>
+                    <a class="nav-link main-nav-links {%if url_name == 'seasons'%} active {%endif%}" href="{% url 'seasons' %}">SEASONS</a>
                 </li>
+                {% endwith %}
             </ul>
             <ul class="navbar-nav login-logout-btns">
                 {% if request.user.is_authenticated %}
