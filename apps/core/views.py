@@ -36,7 +36,7 @@ def sightings(request):
             count += 1
 
     context = {
-        'stats': sorted(occurance_of_year),
+        'stats': occurance_of_year,
         'count': count
     }
     return render(request, 'pages/sightings.html', context)

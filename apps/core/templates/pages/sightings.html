@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - SIGHTINGS
+    SASQ-WATCH - SIGHTINGS
 {% endblock title %}
 
 
 {% block content %}
-        {% include "../pages/contents.html" %}
-        {{stats}}
-        {{count}}
+<div class='container contents-container'>
+    <div class='row'>
+        <div class='col contents-col'>
+            {{stats}}
+            {{count}}
+        </div>
+
+    </div>
+</div>
+        
 {% endblock content %}

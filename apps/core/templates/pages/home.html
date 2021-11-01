@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    SASQ-WATCH - Home
+    SASQ-WATCH - HOME
 {% endblock title %}
 
 
@@ -17,33 +17,33 @@
 
     <div class='home-content-wrapper'>
         <div class='home-row-container'>
-            <div class='dash-wrapper'>
-                <div class='dash-cards'>
+            <form class='dash-wrapper' action="{%url 'sightings'%}" method="get">
+                <button class='dash-cards'>
                 
-                </div>
+                </button>
                 <p>SIGHTINGS</p>
-            </div>
-            <div class='dash-wrapper'>
-                <div class='dash-cards'>
+            </form>
+            <form class='dash-wrapper' action="{%url 'states'%}" method="get">
+                <button class='dash-cards'>
                 
-                </div>
+                </button>
                 <p>STATES</p>
-            </div>
-
+            </form>
         </div>
+
         <div class='home-row-container'>
-            <div class='dash-wrapper'>
-                <div class='dash-cards'>
+            <form class='dash-wrapper' action="{%url 'years'%}" method="get">
+                <button class='dash-cards'>
                 
-                </div>
+                </button>
                 <p>YEARS</p>
-            </div>
-            <div class='dash-wrapper'>
-                <div class='dash-cards'>
+            </form>
+            <form class='dash-wrapper' action="{%url 'seasons'%}" method="get">
+                <button class='dash-cards'>
                 
-                </div>
+                </button>
                 <p>SEASONS</p>
-            </div>
+            </form>
         </div>
     </div>
   
