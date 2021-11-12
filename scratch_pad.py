@@ -1,36 +1,46 @@
 from collections import Counter
 import numpy as np
 import json
+import pprint
 
-
-#this function is a function to help parse out bad or messy data
-with open('bfro_reports.json') as bfro_jsonfile:
+def parse_bfro_json():
+    with open('bfro_reports.json') as bfro_jsonfile: 
         data = json.load(bfro_jsonfile)
+    return data
 
-occurance_of_year = {}
-occurance_list = []
-year_list = []
-total_occurance_list = []
-count = 0
-for object in data:
-    year = object.get('YEAR')
-    year_as_str = str(year)
-    if year_as_str not in occurance_of_year and year_as_str.isdigit():
-        occurance_of_year[year_as_str] = 0
-    if year_as_str.isdigit():
-        occurance_of_year[year_as_str] += 1
-        count += 1
+    ##### SEASONS BLOCK #####
+def _states_parse(): #seasons helper to parse json data
+    data = parse_bfro_json()
+    
+    states_dict = {}
+    for dict in data:
+        state = dict.get('STATE')
+        if state not in states_dict:
+            states_dict[state] = 0
+        if state:
+            states_dict[state] += 1
 
-#pygal line graph accepts list only; make list
-for year,count in occurance_of_year.items():
-    year_list.append(year)
-    occurance_list.sort()
-    year_list.sort()
-# print(f' this is the year list, {year_list}')
+    return states_dict
 
+def _states_lists():
+    states_dict = _states_parse()
+    # pprint.pprint(states_dict)
+    states_list = []
+    sightings_list = []
 
+    for states,sightings in states_dict.items():
+        states_list.append(states)
+        sightings_list.append(sightings)
 
+    return(states_list, sightings_list)
+    
+def states():
+    states_list, sightings_list = _states_lists()
 
+    pprint.pprint(states_list)
+    pprint.pprint(sightings_list)
+
+states()
 
 ######practice turnig string numbers to numbers, then numbers to decades######
 # years_nums = []
