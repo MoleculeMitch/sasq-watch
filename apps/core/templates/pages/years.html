@@ -7,9 +7,11 @@
 
 {% block content %}
 <div class='container contents-container'>
-    <div class='row'>
+    <div class='row contents-row'>
         <div class='col contents-col'>
-            <embed class ='line-chart'type="image/svg+xml" src="{{ sightings_line_svg|safe }}" />
+            <div class='pygal-wrapper'>
+                <embed class ='line-chart'type="image/svg+xml" src="{{ sightings_line_svg|safe }}" />
+            </div>
         </div>
 
     </div>

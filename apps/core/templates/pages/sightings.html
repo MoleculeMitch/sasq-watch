@@ -7,11 +7,30 @@
 
 {% block content %}
 <div class='container contents-container'>
-    <div class='row'>
-        <div class='col contents-col'>
-            
+    <div class='row contents-row'>
+        <div class='sightings-form_wrapper'>
+            <label for="year">Choose a Year:</label>
+                <select name="year" onchange='location = this.value;'>
+                    <option> Choose a Year</option>
+                    {%for item in all_years%}
+                    <option value='?y={{item}}'> {{item}} </option>
+                    {%endfor%}
+                </select>
         </div>
-
+        <div class='col sightings-contents-col'>
+                    {%for item in sightings%}
+                    <ul class='sightings-list'>
+                        <li>YEAR: <p>{{item.YEAR}}</p> </li>
+                        <li>SEASON: <p>{{item.SEASON}}</p> </li>
+                        <li>MONTH: <p>{{item.MONTH}}</p> </li>
+                        <li>STATE: <p>{{item.STATE}}</p> </li>
+                        <li>COUNTY: <p>{{item.COUNTY}}</p> </li>
+                        <li>LOCATION: <p>{{item.LOCATION_DETAILS}}</p> </li>
+                        <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>      
+                    </ul>
+                    <div class='underline'></div>
+                    {%endfor%}
+        </div>
     </div>
 </div>
         

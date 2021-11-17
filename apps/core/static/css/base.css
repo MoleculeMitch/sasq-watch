@@ -102,15 +102,21 @@ body{
  .contents-container {
     margin: 2rem 0;
 }
-
+.contents-row {
+    flex-direction: column;
+}
 .contents-col{
-    width: fit-content;
     height: fit-content;
     padding:0;
     margin: auto;
-    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    overflow: auto;
+    max-height: 35rem;
 }
-
+.pygal-wrapper {
+    min-width: 75rem;
+}
 /* MEDIA QUERIES HERE:  */
 @media (max-width: 1200px){
     .navbar-collapse{

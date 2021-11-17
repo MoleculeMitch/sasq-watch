@@ -1,0 +1,38 @@
+.sightings-form_wrapper{
+    width: fit-content;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 5px 5px 0 0;
+}
+.sightings-contents-col{
+    margin: auto;
+    background: #fff;
+    border-radius: 0 10px 10px 10px;
+    overflow: auto;
+    max-height: 29.375rem;
+    padding:1.25rem;
+}
+.sightings-list{
+    list-style: none;
+}
+.sightings-list li {
+    display: flex;
+    margin-bottom: 5px;
+    font-family: var(--header-font);
+    color: #171313;
+    font-size: 1.125em;
+}
+.sightings-list p {
+    margin: 0 0 0 10px;
+    font-size: 1em;
+    color: #4B4A4A;
+    text-align:justify;
+}
+.underline{
+    width: 100%;
+    height: 3px;
+    margin: 10px auto;
+    border-radius: 50px;
+    background: #4A4646
+}
+

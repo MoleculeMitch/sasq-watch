@@ -1,4 +1,5 @@
 from collections import Counter
+from apps.core.views import _years_lists
 import numpy as np
 import json
 import pprint
@@ -8,39 +9,36 @@ def parse_bfro_json():
         data = json.load(bfro_jsonfile)
     return data
 
-    ##### SEASONS BLOCK #####
-def _states_parse(): #seasons helper to parse json data
+def _sightings_parse():
     data = parse_bfro_json()
-    
-    states_dict = {}
+
+    sightings_dict = {}
     for dict in data:
+        year = dict.get('YEAR')
+        season = dict.get('SEASON')
+        month = dict.get('MONTH')
         state = dict.get('STATE')
-        if state not in states_dict:
-            states_dict[state] = 0
-        if state:
-            states_dict[state] += 1
+        county = dict.get('COUNTY')
+        location_details = dict.get('LOCATION_DETAILS')
+        observed = dict.get('OBSERVED')
+        data_tuple = (year, season, month, state, county, location_details, observed)
 
-    return states_dict
+        if data_tuple not in sightings_dict:
+            sightings_dict = {
+                'year':year,
+                'season':season,
+                'month': month,
+                'state':state,
+                'county': county,
+                'location_details': location_details,
+                'observed': observed
+            }
+    pprint.pprint(sightings_dict)
 
-def _states_lists():
-    states_dict = _states_parse()
-    # pprint.pprint(states_dict)
-    states_list = []
-    sightings_list = []
+_sightings_parse()
 
-    for states,sightings in states_dict.items():
-        states_list.append(states)
-        sightings_list.append(sightings)
 
-    return(states_list, sightings_list)
-    
-def states():
-    states_list, sightings_list = _states_lists()
 
-    pprint.pprint(states_list)
-    pprint.pprint(sightings_list)
-
-states()
 
 ######practice turnig string numbers to numbers, then numbers to decades######
 # years_nums = []

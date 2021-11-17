@@ -3,6 +3,7 @@ from collections import Counter
 import pygal
 from pygal.style import Style
 from pygal.style import DefaultStyle
+import pprint
 
 import json
 
@@ -34,13 +35,39 @@ def about(request):
     return render(request, 'pages/about.html', context)
 ##### END ABOUT BLOCK#####
 
+
 ##### SIGHTINGS BLOCK #####
+
 def sightings(request):
-    
+    data = parse_bfro_json()
+
+    filtered = []
+    all_years = {}
+    all_years_sorted = []
+    for item in data:
+        year = item.get('YEAR')
+        year_as_str = str(year)
+        if year_as_str not in all_years and year_as_str.isdigit():
+            all_years[year_as_str] = 0
+        if year_as_str.isdigit():
+            all_years[year_as_str] += 1
+
+        if year_as_str == request.GET.get('y'):
+            filtered.append(item)
+        # if item['YEAR'] == request.GET.get('y'):
+        #     filtered.append(item)
+
+    for year, count in all_years.items():
+        all_years_sorted.append(year)
+        all_years_sorted.sort()
+
     context = {
-    
+        'sightings': filtered,
+        'all_years': all_years_sorted
     }
+        # pprint.pprint(context)
     return render(request, 'pages/sightings.html', context)
+
 ##### END SIGHTINGS BLOCK #####
 
 
@@ -95,7 +122,6 @@ def years(request): #years main function, renders pygal line chart
 
 
 ##### STATES BLOCK #####
-##### SEASONS BLOCK #####
 def _states_parse(): #seasons helper to parse json data
     data = parse_bfro_json()
     
