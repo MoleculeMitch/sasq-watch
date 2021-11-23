@@ -1,4 +1,6 @@
 from collections import Counter
+
+from django.http import request
 from apps.core.views import _years_lists
 import numpy as np
 import json
@@ -9,36 +11,36 @@ def parse_bfro_json():
         data = json.load(bfro_jsonfile)
     return data
 
-def _sightings_parse():
+def _parse_years(): #years helper to parse json data
     data = parse_bfro_json()
 
-    sightings_dict = {}
+    occurance_of_year = {}
     for dict in data:
         year = dict.get('YEAR')
-        season = dict.get('SEASON')
-        month = dict.get('MONTH')
-        state = dict.get('STATE')
-        county = dict.get('COUNTY')
-        location_details = dict.get('LOCATION_DETAILS')
-        observed = dict.get('OBSERVED')
-        data_tuple = (year, season, month, state, county, location_details, observed)
+        year_as_str = str(year)
+        if year_as_str not in occurance_of_year and year_as_str.isdigit():
+            occurance_of_year[year_as_str] = 0
+        if year_as_str.isdigit():
+            occurance_of_year[year_as_str] += 1
 
-        if data_tuple not in sightings_dict:
-            sightings_dict = {
-                'year':year,
-                'season':season,
-                'month': month,
-                'state':state,
-                'county': county,
-                'location_details': location_details,
-                'observed': observed
-            }
-    pprint.pprint(sightings_dict)
+    pprint.pprint(occurance_of_year)
 
-_sightings_parse()
+    return occurance_of_year
 
+def _years_lists(): #years helper to create usable lists for pygal
+    occurance_of_year = _parse_years()
+    
+    occurance_list = []
+    year_list = []
+    counter = 0
+    for year,count in occurance_of_year.items():
+        occurance_list.append(count)
+        year_list.append(year)
+        occurance_list.sort()
+        year_list.sort()
+        counter+=1
 
-
+_years_lists()
 
 ######practice turnig string numbers to numbers, then numbers to decades######
 # years_nums = []

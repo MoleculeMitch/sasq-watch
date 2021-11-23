@@ -3,7 +3,12 @@
     padding: 5px;
     background: rgba(255, 255, 255, 0.85);
     border-radius: 5px 5px 0 0;
+    display: flex;
 }
+.sightings-form_wrapper p{
+    margin: 0 10px;
+}
+
 .sightings-contents-col{
     margin: auto;
     background: #fff;
@@ -36,3 +41,9 @@
     background: #4A4646
 }
 
+
+@media (max-width: 767px){
+    .sightings-contents-col{
+        border-radius: 0 0px 10px 10px;
+    }
+}
