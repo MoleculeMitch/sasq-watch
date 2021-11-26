@@ -233,7 +233,7 @@ def _parse_seasons_months(): #seasons helper to parse json data
 
     return (occurance_of_seasons, occurance_of_month)
 
-def months():
+def _months():
     occurance_of_seasons, occurance_of_month = _parse_seasons_months()
 
     custom_style = Style(
@@ -260,9 +260,8 @@ def months():
 
     return months_pie_svg
 
-def seasons(request):
+def _seasons():
     occurance_of_seasons, occurance_of_month = _parse_seasons_months()
-    months_pie_svg = months()
 
     custom_style = Style(
         label_font_size = 10,
@@ -272,7 +271,7 @@ def seasons(request):
 
     pie_chart = pygal.Pie(height=490, width=1200, style=custom_style)
     pie_chart.title = 'Number of Sightings Per Season'
-    ###
+    ### this code block reorder seasons into correct ortder ###
     sightings_per_season_list = list(occurance_of_seasons.items())
     sightings_per_season_reorder = [2,1,0,3]
     sightings_per_season_list = [sightings_per_season_list[i] for i in sightings_per_season_reorder]
@@ -284,7 +283,10 @@ def seasons(request):
         pie_chart.add(season[0], number_of_season_sightings)
 
     seasons_pie_svg = pie_chart.render_data_uri()
-
+    return seasons_pie_svg
+def seasons(request):
+    months_pie_svg = _months()
+    seasons_pie_svg = _seasons()
     context = {
         'seasons_pie_svg': seasons_pie_svg,
         'months_pie_svg': months_pie_svg

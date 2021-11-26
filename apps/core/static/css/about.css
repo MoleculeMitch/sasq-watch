@@ -1,0 +1,18 @@
+
+.about-col{
+    max-width: 45rem;
+    padding: 10px;
+}
+.about-header{
+    font-family: var(--header-font);
+    color: #fff;
+    font-size: clamp(3.25em, 10vw, 4.5em);
+    margin-bottom: 2rem;
+}
+.about-text-body{
+    color: #4A4646;
+    text-align: justify;
+}
+.about-text-body a{
+    color: var(--salmon);
+}
