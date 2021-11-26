@@ -1,8 +1,3 @@
-from collections import Counter
-
-from django.http import request
-from apps.core.views import _years_lists
-import numpy as np
 import json
 import pprint
 
@@ -11,50 +6,35 @@ def parse_bfro_json():
         data = json.load(bfro_jsonfile)
     return data
 
-def _parse_years(): #years helper to parse json data
+def _parse_seasons_months(): #seasons helper to parse json data
     data = parse_bfro_json()
 
-    occurance_of_year = {}
+    occurance_of_seasons = {}
+    occurance_of_month = {}
     for dict in data:
-        year = dict.get('YEAR')
-        year_as_str = str(year)
-        if year_as_str not in occurance_of_year and year_as_str.isdigit():
-            occurance_of_year[year_as_str] = 0
-        if year_as_str.isdigit():
-            occurance_of_year[year_as_str] += 1
+        season = dict.get('SEASON')
+        month = dict.get('MONTH')
 
-    pprint.pprint(occurance_of_year)
+        if season not in occurance_of_seasons:
+            occurance_of_seasons[season] = 0
+        if season:
+            occurance_of_seasons[season] += 1
 
-    return occurance_of_year
+        if month not in occurance_of_month:
+            occurance_of_month[month] = 0
+        if month:
+            occurance_of_month[month] += 1
 
-def _years_lists(): #years helper to create usable lists for pygal
-    occurance_of_year = _parse_years()
-    
-    occurance_list = []
-    year_list = []
-    counter = 0
-    for year,count in occurance_of_year.items():
-        occurance_list.append(count)
-        year_list.append(year)
-        occurance_list.sort()
-        year_list.sort()
-        counter+=1
+    return (occurance_of_seasons, occurance_of_month)
 
-_years_lists()
-
-######practice turnig string numbers to numbers, then numbers to decades######
-# years_nums = []
-# for years_as_nums in year_list:
-#     test=int(years_as_nums)
-#     years_nums.append(test)
-# # print(years_nums)
+def seasons():
+    occurance_of_seasons, occurance_of_month = _parse_seasons_months()
+    sightings_per_season_list = list(occurance_of_seasons.items())
+    sightings_per_season_reorder = [2,1,0,3]
+    sightings_per_season_list = [sightings_per_season_list[i] for i in sightings_per_season_reorder]
 
 
-# years=np.array(years_nums)
-# decades = []
-# for year in years:
-#     decade = int(np.floor(year / 10) * 10)
-#     decades.append(decade)
-# decades.sort()
-# print(f'numpy example {decades}') 
-#### this practice block is a successs ####
+    for season in sightings_per_season_list:
+        number_of_season_sightings = season[1]
+        print(number_of_season_sightings)
+seasons()

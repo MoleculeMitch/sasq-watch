@@ -247,12 +247,15 @@ def months():
 
     pie_chart = pygal.Pie(height=490, width=1200, style=custom_style)
     pie_chart.title = 'Number of Sightings Per Month'
+    ### this code block reorder months into correct ortder ###
+    month_list = list(occurance_of_month.items())
+    month_order = [10,5,12,4,2,3,8,6,1,7,9,11]
+    month_list = [month_list[i] for i in month_order]
 
+    for month in month_list:  
+        number_of_month_sightings = month[1]
+        pie_chart.add(month[0], number_of_month_sightings)
     
-    for month in occurance_of_month:
-        number_of_month_sightings = occurance_of_month[month]
-        pie_chart.add(month, number_of_month_sightings)
-
     months_pie_svg = pie_chart.render_data_uri()
 
     return months_pie_svg
@@ -269,12 +272,16 @@ def seasons(request):
 
     pie_chart = pygal.Pie(height=490, width=1200, style=custom_style)
     pie_chart.title = 'Number of Sightings Per Season'
+    ###
+    sightings_per_season_list = list(occurance_of_seasons.items())
+    sightings_per_season_reorder = [2,1,0,3]
+    sightings_per_season_list = [sightings_per_season_list[i] for i in sightings_per_season_reorder]
 
-    for season in occurance_of_seasons:
-        if season == 'Unknown':
-            continue
-        number_of_season_sightings = occurance_of_seasons[season]
-        pie_chart.add(season, number_of_season_sightings)
+
+    for season in sightings_per_season_list:
+        number_of_season_sightings = season[1]
+        print(number_of_season_sightings)
+        pie_chart.add(season[0], number_of_season_sightings)
 
     seasons_pie_svg = pie_chart.render_data_uri()
 
