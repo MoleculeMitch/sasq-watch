@@ -9,6 +9,7 @@ django-bootstrap5 = "*"
 django-heroku = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+pygal = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
