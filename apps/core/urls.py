@@ -8,5 +8,6 @@ urlpatterns = [
     path('sightings/', views.sightings, name='sightings'),
     path('years/', views.years, name='years'),
     path('states/', views.states, name='states'),
-    path('seasons/', views.seasons, name='seasons')
+    path('seasons/', views.seasons, name='seasons'),
+    path('journal/', views.journal, name='journal')
 ]

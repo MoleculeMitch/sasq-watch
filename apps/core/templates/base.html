@@ -85,6 +85,11 @@
                 <li class="nav-item">
                     <a class="nav-link main-nav-links {%if url_name == 'seasons'%} active {%endif%}" href="{% url 'seasons' %}">SEASONS</a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link main-nav-links {%if url_name == 'journal'%} active {%endif%}" href="{% url 'journal' %}">JOURNAL</a>
+                </li>
+                {% endif %}
                 {% endwith %}
             </ul>
             <ul class="navbar-nav login-logout-btns">

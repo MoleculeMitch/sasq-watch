@@ -294,3 +294,10 @@ def seasons(request):
 
     return render(request, 'pages/seasons.html', context)
 ##### END SEASONS BLOCK #####
+
+##### JOURNAL BLOCK #####
+def journal(request):
+    context = {
+
+    }
+    return render(request, 'pages/journal.html', context)
