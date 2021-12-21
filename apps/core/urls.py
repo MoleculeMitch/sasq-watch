@@ -9,5 +9,6 @@ urlpatterns = [
     path('years/', views.years, name='years'),
     path('states/', views.states, name='states'),
     path('seasons/', views.seasons, name='seasons'),
-    path('journal/', views.journal, name='journal')
+    path('journal/', views.journal, name='journal'),
+    path('create-bookmark/', views.create_bookmark, name='create_bookmark')
 ]

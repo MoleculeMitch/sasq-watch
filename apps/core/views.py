@@ -1,13 +1,14 @@
 from types import MappingProxyType
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from collections import Counter
 import pygal
 from pygal.style import Style
 from pygal.style import DefaultStyle
 import pprint
+from .models import Bookmark
+from django import forms
 
 import json
-
 
 #helper function designed to parse BFRO data
 def parse_bfro_json():
@@ -82,29 +83,28 @@ def _sightings_filtered( request):
     data = parse_bfro_json()
 
     filtered_data = []
-
+    result_count = 0
     for item in data:
         states = item.get('STATE')
         year = item.get('YEAR')
         year_as_str = str(year)
 
-        if states == request.GET.get('s'):
+        if states == request.GET.get('s') or year_as_str == request.GET.get('y'):
             filtered_data.append(item)
+            result_count+=1
 
-        if year_as_str == request.GET.get('y'):
-            filtered_data.append(item)
-
-    return filtered_data
+    return filtered_data, result_count
     
 def sightings(request):
     all_years_sorted = _sightings_year_parse(request)
     all_states_sorted = _sightings_states_parse(request)
-    filtered_data = _sightings_filtered(request)
+    filtered_data, result_count = _sightings_filtered(request)
 
     context = {
         'sightings': filtered_data,
         'all_years': all_years_sorted,
         'all_states': all_states_sorted,
+        'result_count': result_count
     }
 
     return render(request, 'pages/sightings.html', context)
@@ -301,3 +301,27 @@ def journal(request):
 
     }
     return render(request, 'pages/journal.html', context)
+##### END JOURNAL BLOCK #####
+
+##### BOOKMARK BLOCK #####
+def bookmark(request, bookmark_id):
+    bookmarks = Bookmark.objects.order_by('-created').get(id=bookmark_id)
+    context = {
+        'bookmarked_sighting': bookmarks,
+    }
+    return render(request, 'pages/journal.html', context)
+##### END BOOKMARK BLOCK #####
+
+
+##### CREATE BOOKMARK BLOCK #####    
+def create_bookmark(request):
+    single_sighting_dict = {
+        'title': 'test title'
+    }
+    Bookmark.objects.create(
+        title=single_sighting_dict['title'],
+        # year=single_sighting_dict['year'],
+        logged_by=request.user,	
+    )
+    return redirect('/sightings')
+##### END CREATE BOOKMARK BLOCK #####
