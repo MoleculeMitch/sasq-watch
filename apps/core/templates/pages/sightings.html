@@ -33,10 +33,16 @@
                     {%for item in sightings%}
                     <ul class='sightings-list'>
                         {% if request.user.is_authenticated %}
-                        <!-- <form enctype="multipart/form-data" method="post" action=".">
-                            <input class='bookmark' type='button' title='click to bookmark'/>
-                        </form> -->
-                        <a href='{% url 'create_bookmark' %}'> bookmark me</a>
+
+                        <!-- i think form will need a post method -->
+                        <form method='post' action="{% url 'create_bookmark' %}">
+                            {% csrf_token %}
+                            <input type='hidden' name='special_number' value='{{item.special_number}}'/>
+                            <button class='bookmark' type="submit"></button>
+                        </form>
+
+                        {{item.special_number}}
+
                         {%endif%}
                         <li>YEAR: <p>{{item.YEAR}}</p> <span></span></li>
                         <li>SEASON: <p>{{item.SEASON}}</p> </li>

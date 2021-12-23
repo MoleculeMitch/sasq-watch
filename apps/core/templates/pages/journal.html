@@ -7,7 +7,7 @@
 {% block content %}
 <div class='container contents-container'>
     <div class='row contents-row'>
-        <div class='sightings-form_wrapper'>
+        <div class='sightings-form-wrapper'>
             <div class='test'>
                 <label for="year">Choose a Year:</label>
                     <select name="year" onchange='location = this.value;'>
@@ -31,13 +31,16 @@
         <div class='col sightings-contents-col'>
                     {%for item in sightings%}
                     <ul class='sightings-list'>
-                        <li>YEAR: <p>{{item.YEAR}}</p> </li>
+                        {% if request.user.is_authenticated %}
+                        <!-- <a href='{% url 'create_bookmark' %}' class='bookmark'></a> -->
+                        {%endif%}
+                        <li>YEAR: <p>{{item.YEAR}}</p> <span></span></li>
                         <li>SEASON: <p>{{item.SEASON}}</p> </li>
                         <li>MONTH: <p>{{item.MONTH}}</p> </li>
                         <li>STATE: <p>{{item.STATE}}</p> </li>
                         <li>COUNTY: <p>{{item.COUNTY}}</p> </li>
                         <li>LOCATION: <p>{{item.LOCATION_DETAILS}}</p> </li>
-                        <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>      
+                        <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>  
                     </ul>
                     <div class='underline'></div>
                     {%endfor%}

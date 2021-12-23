@@ -10,4 +10,10 @@ class Bookmark (models.Model):
         on_delete=models.CASCADE,
     )
 
-    title = models.CharField(max_length=160)
+    year = models.CharField(max_length=160, default='')
+    season = models.CharField(max_length=160, default='')
+    month = models.CharField(max_length=160, default='')
+    state = models.CharField(max_length=160, default='')
+    county = models.CharField(max_length=160, default='')
+    location = models.CharField(max_length=160, default='')
+    observed = models.CharField(max_length=160, default='')

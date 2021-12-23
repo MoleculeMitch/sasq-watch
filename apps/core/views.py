@@ -1,4 +1,4 @@
-from types import MappingProxyType
+from types import DynamicClassAttribute, MappingProxyType
 from django.shortcuts import redirect, render
 from collections import Counter
 import pygal
@@ -14,6 +14,8 @@ import json
 def parse_bfro_json():
     with open('bfro_reports.json') as bfro_jsonfile: 
         data = json.load(bfro_jsonfile)
+    for index, item in enumerate(data):
+        item['special_number'] = index
     return data
 
 
@@ -99,7 +101,6 @@ def sightings(request):
     all_years_sorted = _sightings_year_parse(request)
     all_states_sorted = _sightings_states_parse(request)
     filtered_data, result_count = _sightings_filtered(request)
-
     context = {
         'sightings': filtered_data,
         'all_years': all_years_sorted,
@@ -303,25 +304,28 @@ def journal(request):
     return render(request, 'pages/journal.html', context)
 ##### END JOURNAL BLOCK #####
 
-##### BOOKMARK BLOCK #####
-def bookmark(request, bookmark_id):
-    bookmarks = Bookmark.objects.order_by('-created').get(id=bookmark_id)
-    context = {
-        'bookmarked_sighting': bookmarks,
-    }
-    return render(request, 'pages/journal.html', context)
-##### END BOOKMARK BLOCK #####
-
 
 ##### CREATE BOOKMARK BLOCK #####    
 def create_bookmark(request):
-    single_sighting_dict = {
-        'title': 'test title'
-    }
-    Bookmark.objects.create(
-        title=single_sighting_dict['title'],
-        # year=single_sighting_dict['year'],
-        logged_by=request.user,	
-    )
+    data = parse_bfro_json()
+    # print('this is the filtered_data',filtered_data)
+    print('this is the special number!!',request.POST.get('special_number'))
+
+    special_number = int(request.POST.get('special_number'))
+    for sighting in data:
+        if special_number == sighting['special_number']:
+            print('!!!!found one!!!')
+            Bookmark.objects.create(
+                year = sighting['YEAR'],
+                logged_by=request.user,	
+            )
     return redirect('/sightings')
 ##### END CREATE BOOKMARK BLOCK #####
+
+# 1. check if filtered_data is being passed properly
+
+# 2. loop through filtered_data items
+
+# 3. if items == request.POST
+#     then post specified items to database
+

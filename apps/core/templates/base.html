@@ -57,7 +57,7 @@
             and name can bee displayed. -->
             <ul class='navbar-nav'>
                 <li class="nav-item logged-in-as">
-                    <a class="nav-link username" href="{% url 'view_profile' request.user %}" >
+                    {#<!-- <a class="nav-link username" href="{% url 'view_profile' request.user %}" > -->#}
                         <img src="/static/images/userimg.png" class="navbar-avatar" />
                         {{ request.user }}
                     </a>
