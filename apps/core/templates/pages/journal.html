@@ -7,7 +7,7 @@
 {% block content %}
 <div class='container contents-container'>
     <div class='row contents-row'>
-        <div class='sightings-form-wrapper'>
+        <!-- <div class='sightings-form-wrapper'>
             <div class='test'>
                 <label for="year">Choose a Year:</label>
                     <select name="year" onchange='location = this.value;'>
@@ -27,20 +27,24 @@
                         {%endfor%}
                     </select>
             </div>
-        </div>
-        <div class='col sightings-contents-col'>
-                    {%for item in sightings%}
+        </div> -->
+        <div class='col journal-contents-col'>
+                    {%for sighting in bookmarked_sightings%}
                     <ul class='sightings-list'>
-                        {% if request.user.is_authenticated %}
-                        <!-- <a href='{% url 'create_bookmark' %}' class='bookmark'></a> -->
-                        {%endif%}
-                        <li>YEAR: <p>{{item.YEAR}}</p> <span></span></li>
-                        <li>SEASON: <p>{{item.SEASON}}</p> </li>
-                        <li>MONTH: <p>{{item.MONTH}}</p> </li>
-                        <li>STATE: <p>{{item.STATE}}</p> </li>
-                        <li>COUNTY: <p>{{item.COUNTY}}</p> </li>
-                        <li>LOCATION: <p>{{item.LOCATION_DETAILS}}</p> </li>
-                        <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>  
+                        
+                        <form method='post' action="/delete-bookmark/{{ sighting.id }}/">
+                            {%csrf_token%}
+                            <!-- <input type='hidden' name='special_number' value='{{item.special_number}}'/> -->
+                            <button class='trashcan' type="submit"></button>
+                        </form>
+
+                        <li>YEAR: <p>{{sighting.year}}</p> <span></span></li>
+                        <li>SEASON: <p>{{sighting.season}}</p> </li>
+                        <li>MONTH: <p>{{sighting.month}}</p> </li>
+                        <li>STATE: <p>{{sighting.state}}</p> </li>
+                        <li>COUNTY: <p>{{sighting.county}}</p> </li>
+                        <li>LOCATION: <p>{{sighting.location_details}}</p> </li>
+                        <li>OBSERVED: <p>{{sighting.observed}}</p> </li>  
                     </ul>
                     <div class='underline'></div>
                     {%endfor%}

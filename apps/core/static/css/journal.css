@@ -1,0 +1,22 @@
+.journal-contents-col{
+    margin: auto;
+    background: #fff;
+    border-radius: 10px 10px 10px 10px;
+    overflow: auto;
+    max-height: 29.375rem;
+    padding:1.25rem;
+}
+.trashcan{
+    width: 30px;
+    height: 50px;
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+    background: center/cover url('../images/trash.png') no-repeat;
+    border: none;
+}
+.trashcan:hover{
+    transform: scale(1.2);
+    background: center/cover url('../images/hilighttrash.png') no-repeat;
+}
+

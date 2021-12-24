@@ -10,5 +10,6 @@ urlpatterns = [
     path('states/', views.states, name='states'),
     path('seasons/', views.seasons, name='seasons'),
     path('journal/', views.journal, name='journal'),
-    path('create-bookmark/', views.create_bookmark, name='create_bookmark')
+    path('create-bookmark/', views.create_bookmark, name='create_bookmark'),
+    path('delete-bookmark/<bookmark_id>/', views.delete_bookmark, name='delete_bookmark')
 ]

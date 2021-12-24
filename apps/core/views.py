@@ -285,6 +285,7 @@ def _seasons():
 
     seasons_pie_svg = pie_chart.render_data_uri()
     return seasons_pie_svg
+
 def seasons(request):
     months_pie_svg = _months()
     seasons_pie_svg = _seasons()
@@ -296,36 +297,45 @@ def seasons(request):
     return render(request, 'pages/seasons.html', context)
 ##### END SEASONS BLOCK #####
 
-##### JOURNAL BLOCK #####
-def journal(request):
-    context = {
-
-    }
-    return render(request, 'pages/journal.html', context)
-##### END JOURNAL BLOCK #####
-
 
 ##### CREATE BOOKMARK BLOCK #####    
 def create_bookmark(request):
     data = parse_bfro_json()
-    # print('this is the filtered_data',filtered_data)
-    print('this is the special number!!',request.POST.get('special_number'))
-
+    
     special_number = int(request.POST.get('special_number'))
     for sighting in data:
         if special_number == sighting['special_number']:
-            print('!!!!found one!!!')
             Bookmark.objects.create(
                 year = sighting['YEAR'],
+                season = sighting['SEASON'],
+                month = sighting['MONTH'],
+                state = sighting['STATE'],
+                county = sighting['COUNTY'],
+                location = sighting['LOCATION_DETAILS'],
+                observed = sighting['OBSERVED'],
                 logged_by=request.user,	
             )
+
     return redirect('/sightings')
 ##### END CREATE BOOKMARK BLOCK #####
 
-# 1. check if filtered_data is being passed properly
 
-# 2. loop through filtered_data items
+##### DELETE BOOKMARK BLOCK #####
+def delete_bookmark(request, bookmark_id):
+    bookmark = Bookmark.objects.get(id=bookmark_id)
+    bookmark.delete()
 
-# 3. if items == request.POST
-#     then post specified items to database
+    # Redirect to wherever they came from
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+##### END DELETE BOOKMARK BLOCK #####
+
+
+##### JOURNAL BLOCK #####
+def journal(request):
+    bookmarked_sightings = Bookmark.objects.order_by('county')
+    context = {
+        'bookmarked_sightings': bookmarked_sightings
+    }
+    return render(request, 'pages/journal.html', context)
+##### END JOURNAL BLOCK #####
 
