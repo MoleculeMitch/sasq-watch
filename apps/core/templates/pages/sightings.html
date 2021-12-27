@@ -31,26 +31,28 @@
         </div>
         <div class='col sightings-contents-col'>
                     {%for item in sightings%}
-                    <ul class='sightings-list'>
+                        <ul class='sightings-list'>
                         {% if request.user.is_authenticated %}
-
-                        <!-- i think form will need a post method -->
-                        <form method='post' action="{% url 'create_bookmark' %}">
-                            {%csrf_token%}
-                            <input type='hidden' name='special_number' value='{{item.special_number}}'/>
-                            <button class='bookmark' type="submit"></button>
-                        </form>
-
+                            {% if item.special_number in bookmarked_special_number_list %}
+                                <div class='checkmark'></div>
+                            {% else %}
+                                <form method='post' action="{% url 'create_bookmark' %}">
+                                    {%csrf_token%}
+                                    <input type='hidden' name='special_number' value='{{item.special_number}}'/>
+                                    <button class='bookmark' type="submit"></button>
+                                </form>
+                            {% endif %}
                         {%endif%}
-                        <li>YEAR: <p>{{item.YEAR}}</p> <span></span></li>
-                        <li>SEASON: <p>{{item.SEASON}}</p> </li>
-                        <li>MONTH: <p>{{item.MONTH}}</p> </li>
-                        <li>STATE: <p>{{item.STATE}}</p> </li>
-                        <li>COUNTY: <p>{{item.COUNTY}}</p> </li>
-                        <li>LOCATION: <p>{{item.LOCATION_DETAILS}}</p> </li>
-                        <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>  
-                    </ul>
-                    <div class='underline'></div>
+
+                            <li>YEAR: <p>{{item.YEAR}}</p> <span></span></li>
+                            <li>SEASON: <p>{{item.SEASON}}</p> </li>
+                            <li>MONTH: <p>{{item.MONTH}}</p> </li>
+                            <li>STATE: <p>{{item.STATE}}</p> </li>
+                            <li>COUNTY: <p>{{item.COUNTY}}</p> </li>
+                            <li>LOCATION: <p>{{item.LOCATION_DETAILS}}</p> </li>
+                            <li>OBSERVED: <p>{{item.OBSERVED}}</p> </li>  
+                        </ul>
+                        <div class='underline'></div>
                     {%endfor%}
         </div>
     </div>

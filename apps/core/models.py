@@ -17,3 +17,4 @@ class Bookmark (models.Model):
     county = models.CharField(max_length=160, default='')
     location = models.CharField(max_length=160, default='')
     observed = models.CharField(max_length=160, default='')
+    special_number = models.IntegerField(default='')

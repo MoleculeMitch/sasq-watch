@@ -61,7 +61,25 @@
     transform: scale(1.2);
     background: center/cover url('../images/salmark.png') no-repeat;
 }
-
+/* .checkmark{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+    background: center/cover url('../images/greencheck.png') no-repeat;
+    padding: 0;
+    border: solid 2px red;
+} */
+.checkmark{
+    width: 45px;
+    height: 50px;
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+    background: center/cover url('../images/checkmark.png') no-repeat;
+    padding: 0;
+}
 @media (max-width: 767px){
     .sightings-contents-col{
         border-radius: 0 0px 10px 10px;

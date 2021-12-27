@@ -1,6 +1,7 @@
 1. upload personal image to user photo
 2. address bug; bookmark doesnt work if a bookmark feild is incomplete
 3. add notes or text field to bookmarked sightings on journal page
-4. add bookmarked sightings count to journal page
-5. fix responsive design for bookmark and trash PNGs
-. double check all style,html,view,model,url details
+4. make it so that if already bookmarked, cannot book mark again.
+
+6. possibly add a filter for the journal page
+7. double check all style,html,view,model,url details

@@ -101,11 +101,19 @@ def sightings(request):
     all_years_sorted = _sightings_year_parse(request)
     all_states_sorted = _sightings_states_parse(request)
     filtered_data, result_count = _sightings_filtered(request)
+    bookmarked_special_number = Bookmark.objects.values('special_number')
+    bookmarked_special_number_list = []
+
+    for bookmark in bookmarked_special_number:
+        bookmarked_special_number_list.append(bookmark['special_number'])
+        
     context = {
         'sightings': filtered_data,
         'all_years': all_years_sorted,
         'all_states': all_states_sorted,
-        'result_count': result_count
+        'result_count': result_count,
+        'bookmarked_special_number': bookmarked_special_number,
+        'bookmarked_special_number_list': bookmarked_special_number_list
     }
 
     return render(request, 'pages/sightings.html', context)
@@ -313,11 +321,13 @@ def create_bookmark(request):
                 county = sighting['COUNTY'],
                 location = sighting['LOCATION_DETAILS'],
                 observed = sighting['OBSERVED'],
+                special_number =sighting['special_number'],
                 logged_by=request.user,	
             )
 
     return redirect('/sightings')
 ##### END CREATE BOOKMARK BLOCK #####
+
 
 
 ##### DELETE BOOKMARK BLOCK #####
@@ -332,9 +342,14 @@ def delete_bookmark(request, bookmark_id):
 
 ##### JOURNAL BLOCK #####
 def journal(request):
-    bookmarked_sightings = Bookmark.objects.order_by('county')
+    bookmarked_sightings = Bookmark.objects.order_by('year')
+    count = 0
+    for sighting in bookmarked_sightings:
+        if sighting:
+            count +=1
     context = {
-        'bookmarked_sightings': bookmarked_sightings
+        'bookmarked_sightings': bookmarked_sightings,
+        'bookmarked_count': count
     }
     return render(request, 'pages/journal.html', context)
 ##### END JOURNAL BLOCK #####
