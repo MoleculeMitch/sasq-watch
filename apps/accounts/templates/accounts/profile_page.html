@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-<div class="row">
+<div class="row profile-row">
     <div class="col-md-3 profile-card-wrapper">
         <img class='profile-image'src="{{ user.gravatar }}" />
 
@@ -14,7 +14,7 @@
 
         {% if is_viewing_self %}
         <form action="{% url 'edit_profile' %}">
-            <button class='edit-profile-button'> Edit </button>
+            <button class='notes-button'> Edit </button>
         </form>
         {% endif %}
     </div>
