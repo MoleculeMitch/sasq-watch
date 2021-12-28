@@ -4,9 +4,7 @@ from collections import Counter
 import pygal
 from pygal.style import Style
 from pygal.style import DefaultStyle
-import pprint
 from .models import Bookmark
-from django import forms
 
 import json
 
@@ -316,12 +314,12 @@ def create_bookmark(request):
             Bookmark.objects.create(
                 year = sighting['YEAR'],
                 season = sighting['SEASON'],
-                month = sighting['MONTH'],
+                month = sighting.get('MONTH', ''),
                 state = sighting['STATE'],
                 county = sighting['COUNTY'],
-                location = sighting['LOCATION_DETAILS'],
+                location = sighting.get('LOCATION_DETAILS', ''),
                 observed = sighting['OBSERVED'],
-                special_number =sighting['special_number'],
+                special_number = sighting['special_number'],
                 logged_by=request.user,	
             )
 
@@ -353,4 +351,15 @@ def journal(request):
     }
     return render(request, 'pages/journal.html', context)
 ##### END JOURNAL BLOCK #####
+
+
+#### ADD JOURNAL NOTES #####
+def add_journal_note(request, bookmark_id):
+
+    bookmark = Bookmark.objects.get(id=bookmark_id)
+    bookmark.notes = request.POST['notes']
+    bookmark.save()
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+#### END ADD JOURNAL NOTES #####
 

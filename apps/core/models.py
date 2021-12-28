@@ -1,7 +1,7 @@
 from django.db import models
 from apps.accounts.models import User
 from django.db.models.deletion import CASCADE
-
+import hashlib
 # Create your models here.
 class Bookmark (models.Model):
 
@@ -17,4 +17,18 @@ class Bookmark (models.Model):
     county = models.CharField(max_length=160, default='')
     location = models.CharField(max_length=160, default='')
     observed = models.CharField(max_length=160, default='')
+    notes = models.TextField(default='')
     special_number = models.IntegerField(default='')
+
+
+    ##### speak with headmaster michael about this curious conundrum #####
+        # solution would be null = true, default = None
+        # or restart data base and clear all migrations and migrate all at once
+    def get_gravatar(self):
+        # This is the example code found online for Gravatar, which will
+        # randomly generate avatars based on email (we'll use user.username in
+        # this case).
+        email = self.user.username
+        encoded = hashlib.md5(email.encode('utf8')).hexdigest()
+        gravatar_url = "http://www.gravatar.com/avatar/%s?d=identicon" % encoded
+        return gravatar_url

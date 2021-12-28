@@ -20,7 +20,6 @@
                 
                         <form method='post' action="/delete-bookmark/{{ sighting.id }}/">
                             {%csrf_token%}
-                            <!-- <input type='hidden' name='special_number' value='{{item.special_number}}'/> -->
                             <button class='trashcan' type="submit"></button>
                         </form>
 
@@ -31,7 +30,15 @@
                         <li>COUNTY: <p>{{sighting.county}}</p> </li>
                         <li>LOCATION: <p>{{sighting.location}}</p> </li>
                         <li>OBSERVED: <p>{{sighting.observed}}</p> </li>  
+                        <li>NOTES: <p>{{sighting.notes}}</p> </li>  
                     </ul>
+
+                    <form class='notes-form' method='post' action="{% url 'add_journal_note' sighting.id %}">
+                        {%csrf_token%}
+                        <textarea class='textarea-notes' name='notes'> </textarea>
+                        <button class='notes-button' type="submit">Save</button>
+                    </form>
+
                     <div class='underline'></div>
                     {%endfor%}
         </div>

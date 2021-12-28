@@ -6,20 +6,17 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-3">
-        <img src="{{ user.gravatar }}" />
+    <div class="col-md-3 profile-card-wrapper">
+        <img class='profile-image'src="{{ user.gravatar }}" />
 
-        <h3>@{{ user.username }}</h3>
-        <p><strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
-        <p>{{ user.bio }}</p>
+        <h1>{{ user.username }}</h1>
+        <p class='profile-user-name'>{{ user.first_name }} {{ user.last_name }}</p>
 
         {% if is_viewing_self %}
-            <a href="{% url "edit_profile" %}">Edit</a>
+        <form action="{% url 'edit_profile' %}">
+            <button class='edit-profile-button'> Edit </button>
+        </form>
         {% endif %}
-    </div>
-
-    <div class="col-md-9">
-        stuff could go here...
     </div>
 </div>
 {% endblock %}
