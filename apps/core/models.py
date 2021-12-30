@@ -15,8 +15,8 @@ class Bookmark (models.Model):
     month = models.CharField(max_length=160, default='')
     state = models.CharField(max_length=160, default='')
     county = models.CharField(max_length=160, default='')
-    location = models.CharField(max_length=160, default='')
-    observed = models.CharField(max_length=160, default='')
+    location = models.TextField(default='')
+    observed = models.TextField(default='')
     notes = models.TextField(default='')
     special_number = models.IntegerField(default='')
 
