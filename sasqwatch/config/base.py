@@ -126,3 +126,20 @@ LOGIN_URL = '/account/login/'
 
 # Specify we are using a custom user model
 AUTH_USER_MODEL = 'accounts.User'
+
+
+##### configuring logging to show all messages to console
+    ##### this helps find error messages
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
